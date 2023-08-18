@@ -9,7 +9,14 @@ const CartPage = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state: RootState) => state.cart);
 
-  const cartItemsUnique = [...new Set(cartItems)];
+  const cartItemsUnique = cartItems.filter((obj: IProduct, index) => {
+    return (
+      index ===
+      cartItems.findIndex(
+        (itm: IProduct) => obj.id === itm.id && obj.title === itm.title
+      )
+    );
+  });
 
   const clearAll = () => {
     dispatch(removeAll());
