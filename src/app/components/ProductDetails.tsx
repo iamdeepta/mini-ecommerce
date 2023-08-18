@@ -1,7 +1,32 @@
+"use client";
+
 import Image from "next/image";
-import { IProductItem } from "../interfaces/product";
+import { IProduct, IProductItem } from "../interfaces/product";
+import { add, removeOne } from "../redux/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import IncrementDecrementButton from "./IncrementDecrementButton";
+import { RootState } from "../redux/store";
 
 const ProductDetails = ({ item }: IProductItem) => {
+  const cartItems = useSelector((state: RootState) => state.cart);
+  const dispatch = useDispatch();
+
+  const cartItemDuplicate = cartItems.filter(
+    (itm: IProduct) => itm.id === item.id
+  );
+
+  const cartItemDuplicateLength = cartItemDuplicate.length;
+
+  const addToCart = () => {
+    dispatch(add(item));
+  };
+
+  const removeOneItem = () => {
+    if (cartItemDuplicateLength > 0) {
+      dispatch(removeOne(item.id));
+    }
+  };
+
   return (
     <>
       <div className="flex font-sans m-3">
@@ -9,7 +34,7 @@ const ProductDetails = ({ item }: IProductItem) => {
           <Image
             src={item.image}
             alt="image"
-            className="absolute inset-0 w-full h-80 object-cover"
+            className="absolute inset-0 w-full h-80 object-contain"
             loading="lazy"
             height={140}
             width={240}
@@ -33,27 +58,18 @@ const ProductDetails = ({ item }: IProductItem) => {
             </div>
           </div>
 
-          <div className="flex justify-start items-center mt-3">
-            <button
-              className="border-stone-950 p-2 font-bold text-xl"
-              type="button"
-            >
-              -
-            </button>
-            <p className="p-2 font-bold text-xl">5</p>
-            <button
-              className="border-stone-950 p-2 font-bold text-xl"
-              type="button"
-            >
-              +
-            </button>
-          </div>
+          <IncrementDecrementButton
+            cartItemDuplicateLength={cartItemDuplicateLength}
+            addItem={addToCart}
+            removeOneItem={removeOneItem}
+          />
 
           <div className="flex space-x-4 mb-6 text-sm font-medium mt-7">
             <div className="flex-auto flex space-x-4">
               <button
                 className="h-10 px-6 font-semibold rounded-md bg-blue-500 text-white"
                 type="button"
+                onClick={() => addToCart()}
               >
                 Add to cart
               </button>

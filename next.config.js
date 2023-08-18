@@ -3,9 +3,6 @@ const nextConfig = {
   images: {
     domains: ["fakestoreapi.com"],
   },
-  experimental: {
-    serverActions: true,
-  },
 };
 
 module.exports = nextConfig;

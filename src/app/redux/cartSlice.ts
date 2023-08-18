@@ -2,6 +2,7 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { IProduct } from "../interfaces/product";
 
 const cartSlice = createSlice({
   name: "cart",
@@ -10,11 +11,20 @@ const cartSlice = createSlice({
     add: (state, action: PayloadAction<any>) => {
       state.push(action.payload);
     },
-    remove: (state, action) => {
-      return state.filter((item: any) => item.id !== action.payload);
+    remove: (state, action: PayloadAction<number>) => {
+      return state.filter((item: IProduct) => item.id !== action.payload);
+    },
+    removeAll: (state) => {
+      return (state = []);
+    },
+    removeOne: (state, action: PayloadAction<number>) => {
+      state.splice(
+        state.findIndex((item: IProduct) => item.id === action.payload),
+        1
+      );
     },
   },
 });
 
-export const { add, remove } = cartSlice.actions;
+export const { add, remove, removeAll, removeOne } = cartSlice.actions;
 export default cartSlice.reducer;

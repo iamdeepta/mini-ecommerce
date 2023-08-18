@@ -25,10 +25,6 @@ const ProductList = ({ products, categories }: IProductList) => {
   const [orderVal, setOrderVal] = useState<string>("asc");
   const [categoryVal, setCategoryVal] = useState<string>("");
 
-  useEffect(() => {
-    getAllProducts(category, sortOrder);
-  }, []);
-
   const sortByOrder = async (orderValue: string) => {
     setLoading(true);
     // setOrderVal(orderValue);
@@ -82,7 +78,7 @@ const ProductList = ({ products, categories }: IProductList) => {
           </div>
         </div>
 
-        <div className="flex justify-stretch items-center flex-wrap mt-5">
+        <div className="flex justify-start items-start basis-1/4 w-full flex-wrap mt-5">
           {loading ? (
             <Loader />
           ) : (

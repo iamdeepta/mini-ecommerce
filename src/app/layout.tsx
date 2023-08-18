@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className={`${inter.className}`}>
         <Providers>
           <Navbar />
-          <main className="pl-20 pr-20 mt-10">{children}</main>
+          <main className="pl-10 pr-10 mt-10">{children}</main>
         </Providers>
       </body>
     </html>
