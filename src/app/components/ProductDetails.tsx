@@ -1,14 +1,13 @@
 import Image from "next/image";
-import Link from "next/link";
-import React from "react";
+import { IProductItem } from "../interfaces/product";
 
-const ProductDetails = () => {
+const ProductDetails = ({ item }: IProductItem) => {
   return (
     <>
       <div className="flex font-sans m-3">
         <div className="flex-none w-60 relative">
           <Image
-            src="/product_image.jpg"
+            src={item.image}
             alt="image"
             className="absolute inset-0 w-full h-80 object-cover"
             loading="lazy"
@@ -19,19 +18,18 @@ const ProductDetails = () => {
         <form className="flex-auto p-6">
           <div>
             <h1 className="flex-auto text-lg font-semibold text-slate-900">
-              classNameic Utility Jacket
+              {item.title}
             </h1>
 
-            <div className="text-lg font-semibold text-slate-500">৳ 110.00</div>
+            <div className="text-lg font-semibold text-slate-500">
+              ৳ {item.price}
+            </div>
             <p className="mt-2">
-              Category: <span className="font-bold">Shirt</span>
+              Category: <span className="font-bold">{item.category}</span>
             </p>
 
             <div className="w-full flex-none text-sm font-medium text-slate-700 mt-2">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore
-              blanditiis magni ipsam doloremque incidunt veritatis? Quia itaque,
-              illum porro nulla doloribus tempora perspiciatis ipsam esse,
-              blanditiis laudantium reprehenderit consequatur reiciendis!
+              {item.description}
             </div>
           </div>
 

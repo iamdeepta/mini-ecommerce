@@ -1,7 +1,15 @@
+import { getSingleProduct } from "@/app/api/productApis";
 import ProductDetails from "@/app/components/ProductDetails";
-import React from "react";
 
-const ProductDetailPage = ({ params }: any) => {
+interface IParam {
+  params: {
+    id: number;
+  };
+}
+
+const ProductDetailPage = async ({ params }: IParam) => {
+  const singleProduct = await getSingleProduct(params.id);
+
   return (
     <div>
       <div className="flex justify-between items-center">
@@ -9,7 +17,7 @@ const ProductDetailPage = ({ params }: any) => {
       </div>
 
       <div className="mt-3">
-        <ProductDetails />
+        <ProductDetails item={singleProduct} />
       </div>
     </div>
   );

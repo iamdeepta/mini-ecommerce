@@ -1,8 +1,12 @@
+"use client";
+
 import Link from "next/link";
-import React from "react";
 import { FiShoppingCart } from "react-icons/fi";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 const Navbar = () => {
+  const product = useSelector((state: RootState) => state.cart);
   return (
     <div className="flex justify-between items-center sticky bg-blue-500 pl-20 pr-20 pt-5 pb-5">
       <Link href={"/"}>
